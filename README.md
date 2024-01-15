@@ -1,6 +1,8 @@
 # Image Man
 A simple React TypeScript application with Redux Toolkit and Tailwind CSS for managing items.
 
+![image](https://github.com/h3nzell/imageMan/assets/108277072/35e46636-48f8-4c19-adf9-d33ba861c7fa)
+
 ## Prerequisites
 
 - Node.js (v16 or higher)
