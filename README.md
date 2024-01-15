@@ -27,7 +27,9 @@ A simple React TypeScript application with Redux Toolkit and Tailwind CSS for ma
 - React Toastify
 - React hook form
 
-# Project Structuresrc/
+# Project Structure
+<pre>
+src/
 |-- components/
 |   |-- Component1/
 |   |   |-- Component1.tsx
@@ -59,3 +61,4 @@ A simple React TypeScript application with Redux Toolkit and Tailwind CSS for ma
 |-- App.tsx
 |-- index.tsx
 |-- ...
+</pre>
