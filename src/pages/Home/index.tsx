@@ -1,4 +1,4 @@
-import { useState, type FC } from 'react'
+import { type FC, useEffect, useState } from 'react'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm } from 'react-hook-form'
 
@@ -21,10 +21,26 @@ const HomeContainer: FC = () => {
 
   const {
     reset,
+    trigger,
     register,
+    clearErrors,
     handleSubmit,
     formState: { errors },
-  } = useForm<TFormValues>({ mode: 'onSubmit', resolver: yupResolver(cardItemScheme) })
+  } = useForm<TFormValues>({ mode: 'onBlur', resolver: yupResolver(cardItemScheme) })
+
+  useEffect(() => {
+    if (cardItemData.title && (cardItemData.title.length < 7 || cardItemData.title.length > 25)) {
+      trigger('title')
+    } else {
+      clearErrors('title')
+    }
+
+    if (cardItemData.description && (cardItemData.description.length < 25 || cardItemData.description.length > 250)) {
+      trigger('description')
+    } else {
+      clearErrors('description')
+    }
+  }, [cardItemData.description, cardItemData.title, errors])
 
   const handleModalOpen = () => {
     reset()
@@ -88,9 +104,7 @@ const HomeContainer: FC = () => {
               {...register('title')}
               value={cardItemData.title}
               onChange={e => setCardItemData(prev => ({ ...prev, title: e.target.value }))}
-              className={`w-full p-3  ${
-                errors.title?.message ? 'outline-error' : 'outline-none'
-              } rounded-3xl bg-gray30'`}
+              className={`w-full p-3 ${errors.title?.message && 'outline-error'} rounded-3xl bg-gray30`}
             />
             {errors.title?.message && (
               <Text tagName='span' text={String(errors.title.message)} className='block text-error' />
